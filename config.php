@@ -1,4 +1,4 @@
 <?php 
-define("SYSTEM_PATH", "http://localhost/salon/");
+define("SYSTEM_PATH", "https://combsalon.lk/staff/");
 
 ?>

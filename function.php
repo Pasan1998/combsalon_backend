@@ -2,9 +2,9 @@
 
 function dbConn() {
     $server = "localhost";
-    $user = "root";
-    $password = "";
-    $dbname = "saloon";
+    $user = "combsal2_combsalonadmin";
+    $password = "OkDyOkXe6@L[";
+    $dbname = "combsal2_saloon";
 
     $conn = new mysqli($server, $user, $password, $dbname);
 
