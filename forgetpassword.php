@@ -81,7 +81,7 @@ include 'phpmail/mail.php';
             $resetcustomerid = $_SESSION['EmpId'];
 
             //creating a unique token to send customer
-            $customerresettoken = uniqid();
+            $customerresettoken = rand(100000, 999999);
             //assign that toker to a session
             $_SESSION['resettoken'] = $customerresettoken;
 
@@ -294,7 +294,7 @@ include 'phpmail/mail.php';
 
 
 
-               header("Location:forgetpasswordtwo.php");
+               header("Location:resetpasswordtwo.php");
                 echo 'abc';
             }
         }

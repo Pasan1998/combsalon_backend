@@ -79,6 +79,10 @@ if (@$admindashboard == "active") {
                 <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="<?= SYSTEM_PATH ?>logout.php"><i class="fa fa-sign-out pull-right"></i>
                     Log Out</a>
+                    <?php 
+                    $EmpId=$_SESSION['EmpId'];
+                  ?>
+                  <a class="dropdown-item" href="<?= SYSTEM_PATH ?>employers/profile.php?EmpId=<?= $EmpId?>"><i class="fa fa-sign-out pull-right"></i> Profile</a>
                 </div>
               </li>
 
