@@ -39,11 +39,7 @@ include 'phpmail/mail.php';
 
                 if (!empty($newpassword)) {
                     // Validate password strength
-                    $uppercase = preg_match('@[A-Z]@', $newpassword);
-                    $lowercase = preg_match('@[a-z]@', $newpassword);
-                    $number = preg_match('@[0-9]@', $newpassword);
-                    $specialChars = preg_match('@[^\w]@', $newpassword);
-                    if (!$uppercase || !$lowercase || !$number || !$specialChars || strlen($newpassword) < 8) {
+                    if (strlen($newpassword) < 2) {
                         $messages['error_newpassword'] = "Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.!";
                     }
                 }
@@ -73,13 +69,13 @@ include 'phpmail/mail.php';
                 if (empty($messages)) {
                     $db = dbConn();
                     $newpassword = sha1($newpassword);
-                    echo $sql2 = "UPDATE tbl_emp SET Password = '$newpassword' WHERE EmpId= '$resetcustomerid'";
+                    echo $sql2 = "UPDATE tbl_emp SET EmpPassword = '$newpassword' WHERE EmpId= '$resetcustomerid'";
                     $result2 = $db->query($sql2);
 
                     $to = $Email;
                     $toname = $titlecustomer . $firstnamecustomer . $lastnamecustomer;
-                    $attachment = '../assets/img/signup/jpg';
-                    $subject = "Password Reset Success - Bluetech Electronics";
+                    $attachment = 'assets/img/signup/jpg';
+                    $subject = "Password Reset Success - CombSalon";
                     $body = '<!doctype html>
 <html lang="en-US">
 
@@ -141,7 +137,7 @@ include 'phpmail/mail.php';
                     </tr>
                     <tr>
                         <td style="text-align:center;">
-                            <p style="font-size:14px; color:rgba(69, 80, 86, 0.7411764705882353); line-height:18px; margin:0 0 0;">&copy; <strong> Bluetechelectronics</strong></p>
+                            <p style="font-size:14px; color:rgba(69, 80, 86, 0.7411764705882353); line-height:18px; margin:0 0 0;">&copy; <strong> CombSalon</strong></p>
                         </td>
                     </tr>
                     <tr>
