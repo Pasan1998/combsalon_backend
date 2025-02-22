@@ -54,28 +54,28 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       $result = $db->query($sqllogin);
       ?>
       <script>
-        //         let timerInterval;
-        // Swal.fire({
-        //   title: "Auto close alert!",
-        //   html: "I will close in <b></b> milliseconds.",
-        //   timer: 2000,
-        //   timerProgressBar: true,
-        //   didOpen: () => {
-        //     Swal.showLoading();
-        //     const timer = Swal.getPopup().querySelector("b");
-        //     timerInterval = setInterval(() => {
-        //       timer.textContent = `${Swal.getTimerLeft()}`;
-        //     }, 100);
-        //   },
-        //   willClose: () => {
-        //     clearInterval(timerInterval);
-        //   }
-        // }).then((result) => {
-        //   /* Read more about handling dismissals below */
-        //   if (result.dismiss === Swal.DismissReason.timer) {
-        //     console.log("I was closed by the timer");
-        //   }
-        // });
+                let timerInterval;
+        Swal.fire({
+          title: "Auto close alert!",
+          html: "I will close in <b></b> milliseconds.",
+          timer: 2000,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading();
+            const timer = Swal.getPopup().querySelector("b");
+            timerInterval = setInterval(() => {
+              timer.textContent = `${Swal.getTimerLeft()}`;
+            }, 100);
+          },
+          willClose: () => {
+            clearInterval(timerInterval);
+          }
+        }).then((result) => {
+          /* Read more about handling dismissals below */
+          if (result.dismiss === Swal.DismissReason.timer) {
+            console.log("I was closed by the timer");
+          }
+        });
       </script>
       <!-- <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -113,86 +113,87 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 ?>
 
 
-
 <!doctype html>
 <html lang="en">
+  <head>
+  	<link rel="icon" type="image/x-icon" href="<?= SYSTEM_PATH ?>assets/users/logometa.png">
+  	<title>CombSalon Login </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <link rel="icon" type="image/x-icon" href="<?= SYSTEM_PATH ?>assets/users/logometa.png">
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
 
-<title>CombSalon </title>
-
-  <link href="<?= SYSTEM_PATH ?>assets/css/bootstrap.min.css" rel="stylesheet">
-  <link href="<?= SYSTEM_PATH ?>assets/css/font-awesome.min.css" rel="stylesheet">
-  <link href="<?= SYSTEM_PATH ?>assets/css/style.css" rel="stylesheet">
-
-  
-</head>
-
-<body>
-  <section class="form-02-main">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="_lk_de">
-            <div class="form-03-main">
-              <div class="logo">
-                <img src="assets/images/user.png">
-              </div>
-              <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" enctype="multipart/form-data"
-                method="post">
-                <span class="text-danger">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<link rel="stylesheet" href="css/style.css">
+	<style>	
+		.custom-left-align {
+			margin-left: 0 !important; 
+			margin-right: auto; 
+			}
+	</style>
+	</head>
+	<body class="img js-fullheight" style="background-image: url(images/bg.jpg);">
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-start">
+				<div class="col-md-4 text-center mb-6">
+					<h2 class="heading-section">Welcome to CombSalon</h2>
+				</div>
+			</div>
+			<div class="row justify-content-start">
+				<div class="col-md-6 col-lg-4">
+					<div class="login-wrap p-0">
+		      	<h3 class="mb-4 text-center">Have an account?</h3>
+		      	<form ction="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" enctype="multipart/form-data"
+				  method="post"  class="signin-form">
+				  <span class="text-danger">
                   <?= @$messages['error_invalid']; ?>
                 </span>
-                <div class="form-group">
-                  <input type="text" name="username" value="<?= @$username ?>" class="form-control _ge_de_ol"
-                    type="text" placeholder="Enter Username">
-                  <span class="text-danger">
+		      		<div class="form-group">
+		      			<input type="text" class="form-control" placeholder="Username" name="username" value="<?= @$username ?>">
+						  <span class="text-danger">
                     <?= @$messages['error_username']; ?>
                   </span>
-                </div>
-
-                <div class="form-group">
-                  <input type="password" name="password" value="<?= @$password ?>" class="form-control _ge_de_ol"
-                    type="text" placeholder="Enter Password">
-                  <span class="text-danger">
+		      		</div>
+	            <div class="form-group">
+	              <input id="password-field" type="password" class="form-control" placeholder="Password" name="password" value="<?= @$password ?>">
+	              <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+				  <span class="text-danger">
                     <?= @$messages['error_password']; ?>
                   </span>
-                </div>
+	            </div>
+	            <div class="form-group">
+	            	<button type="submit" class="form-control btn btn-primary submit px-3">Sign In</button>
+	            </div>
+	            <div class="form-group d-md-flex ">
+	            	<div class="w-50 ">
+		            	<label class="checkbox-wrap checkbox-primary">Remember Me
+									  <input type="checkbox" checked>
+									  <span class="checkmark"></span>
+									</label>
+								</div>
+								<div class="w-50 text-md-right">
+									<a href="forgetpassword.php" style="color: #fff">Forgot Password</a>
+								</div>
+	            </div>
+	          </form>
+	          <!-- <p class="w-100 text-center">&mdash; Or Sign In With &mdash;</p> -->
+	          <div class="social d-flex text-center">
+	          	<!-- <a href="#" class="px-2 py-2 mr-md-1 rounded"><span class="ion-logo-facebook mr-2"></span> Facebook</a>
+	          	<a href="#" class="px-2 py-2 ml-md-1 rounded"><span class="ion-logo-twitter mr-2"></span> Twitter</a> -->
+	          </div>
+		      </div>
+				</div>
+			</div>
+		</div>
+	</section>
 
-                <div class="checkbox form-group">
+	<script src="js/jquery.min.js"></script>
+  <script src="js/popper.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/main.js"></script>
 
-                  <a href="forgetpassword.php">Forgot Password</a>
-                </div>
-
-                <div class="form-group">
-                  <button class="_btn_04" type="submit">
-                    Login
-                  </button>
-                </div>
-
-              </form>
-
-              <div class="form-group pt-0">
-                <div class="_social_04">
-                  <ol>
-
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</body>
-
+	</body>
 </html>
 
-<?php
-ob_end_flush();
-?>

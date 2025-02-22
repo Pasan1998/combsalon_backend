@@ -158,16 +158,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
   }
 
-  if (!empty($password)) {
-    // Validate password strength
-    $uppercase = preg_match('@[A-Z]@', $password);
-    $lowercase = preg_match('@[a-z]@', $password);
-    $number = preg_match('@[0-9]@', $password);
-    $specialChars = preg_match('@[^\w]@', $password);
-    if (!$uppercase || !$lowercase || !$number || !$specialChars || strlen($password) < 8) {
-      $messages['error_password'] = "Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.!";
-    }
-  }
 
   if ((!empty($password)) && (!empty($confirmpassword))) {
 
@@ -536,7 +526,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 
           <div class="col-md-6 col-sm-6  form-group has-feedback">
-          <label> Enter Password: (8+ characters: 1 Uppercase, 1 Lowercase, 1 Number, 1 Special Character.) : </label>
+          <label> Enter Password: </label>
             <input type="password" class="form-control" id="inputSuccess5" name="password" value="<?= @$password ?>"
               placeholder="Password">
             <!-- <span class="fa fa-phone form-control-feedback right" aria-hidden="true"></span> -->
@@ -547,7 +537,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 
           <div class="col-md-6 col-sm-6  form-group has-feedback">
-          <label> Enter Password :(8+ characters: 1 Uppercase, 1 Lowercase, 1 Number, 1 Special Character. ):</label>
+          <label> Enter Password:</label>
             <input type="password" class="form-control" id="inputSuccess5" name="confirmpassword"
               value="<?= @$confirmpassword ?>" placeholder="Confirm Password">
             <!-- <span class="fa fa-phone form-control-feedback right" aria-hidden="true"></span> -->

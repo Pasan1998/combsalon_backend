@@ -40,7 +40,7 @@ if (@$admindashboard == "active") {
                 <li><a href="<?= SYSTEM_PATH ?>index.php"><i class="fa fa-money"></i> CashOutsz </a>
 
                 </li>
-                <li><a href="<?= SYSTEM_PATH ?>invoice/createinvoicecustomer.php"><i class="fa fa-brief"></i> Create
+                <li><a href="<?= SYSTEM_PATH ?>invoice/createinvoicecustomer.php"><i class="fa fa-line-chart"></i> Create
                     Invoice </a>
 
                 </li>

@@ -8,10 +8,10 @@ if (isset($_SESSION['EmpUserrole']) && $_SESSION['EmpUserrole'] == "management")
   // Redirect to the login page or show an unauthorized message
   header("Location:http://localhost/salon/production/page_403.html");
 
-  
+
 }
 
-  ?>
+?>
 <!-- page content -->
 <div class="right_col" role="main">
   <div class="">
@@ -44,7 +44,7 @@ if (isset($_SESSION['EmpUserrole']) && $_SESSION['EmpUserrole'] == "management")
                   <div class="col-sm">
 
                     <input type="date" class="form-control" name="from" placeholder="Enter From Date"
-                      max="<?php echo date('Y-m-d'); ?>"  required="true" >
+                      max="<?php echo date('Y-m-d'); ?>" required="true">
                   </div>
                   <div class="col-sm">
                     <input type="date" class="form-control" name="to" placeholder="Enter to Date"
@@ -171,7 +171,7 @@ if (isset($_SESSION['EmpUserrole']) && $_SESSION['EmpUserrole'] == "management")
       <div class="col-md-12 col-sm-12  ">
         <div class="x_panel">
           <div class="x_title">
-          <h2>Sales Table Cash Payments <small></small></h2>
+            <h2>Sales Table Cash Payments <small></small></h2>
             <ul class="nav navbar-right panel_toolbox">
               <!-- <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -190,17 +190,17 @@ if (isset($_SESSION['EmpUserrole']) && $_SESSION['EmpUserrole'] == "management")
 
           <div class="x_content">
 
-           
+
 
             <div class="table-responsive">
               <table class="table table-striped jambo_table bulk_action">
                 <thead>
                   <tr class="headings">
 
-                    <!-- <th class="column-title">Invoice Number </th> -->
+                    <th class="column-title">Invoice Number </th>
                     <th class="column-title">Invoice Date </th>
-                    <!-- <th class="column-title">Customer Name </th>
-                            <th class="column-title">Customer Number </th> -->
+                    <th class="column-title">Customer Name </th>
+                    <th class="column-title">Customer Number </th>
                     <th class="column-title">Sale </th>
 
 
@@ -230,12 +230,12 @@ if (isset($_SESSION['EmpUserrole']) && $_SESSION['EmpUserrole'] == "management")
                       ?>
                       <tr class="even pointer">
 
-                        <!-- <td class=" "><?= $row_table_sales['SaleInvoiceNumber'] ?></td> -->
+                        <td class=" "><?= $row_table_sales['SaleInvoiceNumber'] ?></td>
                         <td class=" ">
                           <?= $row_table_sales['SaleDate'] ?>
                         </td>
-                        <!-- <td class=" "><?= ucwords($row_table_sales['CustomerName']) ?> </td>
-                            <td class=" "><?= $row_table_sales['CustomerName'] ?></td> -->
+                        <td class=" "><?= ucwords($row_table_sales['CustomerName']) ?> </td>
+                            <td class=" "><?= $row_table_sales['CustomerName'] ?></td>
                         <td class=" ">
                           <?= $row_table_sales['total_sale'] ?>
                         </td>
@@ -243,18 +243,25 @@ if (isset($_SESSION['EmpUserrole']) && $_SESSION['EmpUserrole'] == "management")
                       </tr>
 
                     <?php }
-                  } ?>
+                  }
+                  else { ?>
+                    <tr>
+                      <td colspan="5" class="text-center">No Records Available</td> <!-- Updated alignment -->
+                    </tr>
+                    <?php
+                  }
+                  ?>
 
                 </tbody>
                 <tfoot>
-                    <tr>
-                      <td colspan=""><strong> Total Amount</strong>
-                      </td>
-                      <td>
-                        <strong><?= number_format(@$totalamount, 2) ?></strong>
-                      </td>
-                    </tr>
-                  </tfoot>
+                  <tr>
+                    <td colspan="4" class="text-center"><strong> Total Amount</strong>
+                    </td>
+                    <td>
+                      <strong><?= number_format(@$totalamount, 2) ?></strong>
+                    </td>
+                  </tr>
+                </tfoot>
               </table>
             </div>
 
@@ -267,34 +274,23 @@ if (isset($_SESSION['EmpUserrole']) && $_SESSION['EmpUserrole'] == "management")
           <div class="x_title">
             <h2>Sales Table Card Payemnts <small></small></h2>
             <ul class="nav navbar-right panel_toolbox">
-              <!-- <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Settings 1</a>
-                            <a class="dropdown-item" href="#">Settings 2</a>
-                          </div>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li> -->
             </ul>
             <div class="clearfix"></div>
           </div>
 
           <div class="x_content">
 
-            <p>Sales in Table view <code></code></p>
+            <!-- <p>Sales in Table view <code></code></p> -->
 
             <div class="table-responsive">
               <table class="table table-striped jambo_table bulk_action">
                 <thead>
                   <tr class="headings">
 
-                    <!-- <th class="column-title">Invoice Number </th> -->
+                    <th class="column-title">Invoice Number </th>
                     <th class="column-title">Invoice Date </th>
-                    <!-- <th class="column-title">Customer Name </th>
-                            <th class="column-title">Customer Number </th> -->
+                    <th class="column-title">Customer Name </th>
+                    <th class="column-title">Customer Number </th>
                     <th class="column-title">Sale </th>
 
 
@@ -303,52 +299,59 @@ if (isset($_SESSION['EmpUserrole']) && $_SESSION['EmpUserrole'] == "management")
                 </thead>
                 <?php
                 if ($where == null) {
-                  $sql_table_sevendays = "SELECT *,DATE(SaleDate) AS sale_day, SUM(SaleAmount) AS total_sale
-  FROM tbl_sales
-  WHERE SaleDate >= CURDATE() - INTERVAL 6 DAY
-  GROUP BY DATE(SaleDate)
-  ORDER BY DATE(SaleDate) DESC;
-  ";
+                  $sql_card_sale = "SELECT *,DATE(SaleDate) AS sale_day, SUM(SaleAmount) AS total_sale
+                                          FROM tbl_sales
+                                          WHERE PaymentType = 2  AND SaleDate >= CURDATE() - INTERVAL 6 DAY
+                                          GROUP BY DATE(SaleDate)
+                                          ORDER BY DATE(SaleDate) DESC;
+                                          ";
                   $db = dbConn();
-                  $results_table = $db->query($sql_table_sevendays);
+                  $results_card_sale = $db->query($sql_card_sale);
                 }
 
 
                 ?>
-                <tbody>
-                  <?php
-                  if ($results_table->num_rows > 0) {
-                    $i = 1;
-                    $totalamount = 0;
-                    while ($row_table_sales = $results_table->fetch_assoc()) {
-                      ?>
-                      <tr class="even pointer">
-
-                        <!-- <td class=" "><?= $row_table_sales['SaleInvoiceNumber'] ?></td> -->
-                        <td class=" ">
-                          <?= $row_table_sales['SaleDate'] ?>
-                        </td>
-                        <!-- <td class=" "><?= ucwords($row_table_sales['CustomerName']) ?> </td>
-                            <td class=" "><?= $row_table_sales['CustomerName'] ?></td> -->
-                        <td class=" ">
-                          <?= $row_table_sales['total_sale'] ?>
-                        </td>
-                        <?php $totalamount += $row_table_sales['total_sale'] ?>
+                  <tbody>
+                    <?php
+                    if ($results_card_sale->num_rows > 0) {
+                      $i = 1;
+                      $totalamount = 0;
+                      while ($row_results_card_sale = $results_card_sale->fetch_assoc()) {
+                        ?>
+                        <tr class="even pointer">
+                          <td class=" "><?= $row_results_card_sale['SaleInvoiceNumber'] ?></td>
+                          <td class=" "><?= $row_results_card_sale['SaleDate'] ?></td>
+                          <td class=" "><?= ucwords($row_results_card_sale['CustomerName']) ?></td>
+                          <td class=" "><?= $row_results_card_sale['CustomerName'] ?></td>
+                          <td class=" "><?= $row_results_card_sale['total_sale'] ?></td>
+                          <?php $total_amount_card_sale += $row_results_card_sale['total_sale'] ?>
+                        </tr>
+                        <?php
+                      }
+                    } else { ?>
+                      <tr>
+                        <td colspan="5" class="text-center">No Records Available</td> <!-- Updated alignment -->
                       </tr>
+                      <?php
+                    }
+                    ?>
+                  </tbody>
 
-                    <?php }
-                  } ?>
-
-                </tbody>
                 <tfoot>
-                    <tr>
-                      <td colspan=""><strong> Total Amount</strong>
-                      </td>
-                      <td>
-                        <strong><?= number_format(@$totalamount, 2) ?></strong>
-                      </td>
-                    </tr>
-                  </tfoot>
+                  <?php
+                  if (@$total_amount_card_sale){?>
+                                    <tr>
+                    <td colspan=""><strong> Total Amount</strong>
+                    </td>
+                    <td>
+                      <strong><?= number_format(@$total_amount_card_sale, 2) ?></strong>
+                    </td>
+                  </tr><?php
+
+                  }
+                  ?>
+
+                </tfoot>
               </table>
             </div>
 
@@ -411,7 +414,7 @@ if (isset($_SESSION['EmpUserrole']) && $_SESSION['EmpUserrole'] == "management")
       extract($_POST);
       //    $CustomerId = $_GET['CustomerId'];
     
-       $sql_spcific_date = "SELECT date_range.date AS sale_day, COALESCE(SUM(s.SaleAmount), 0) AS total_sale
+      $sql_spcific_date = "SELECT date_range.date AS sale_day, COALESCE(SUM(s.SaleAmount), 0) AS total_sale
             FROM (
                 SELECT CURDATE() - INTERVAL n DAY AS date
                 FROM (
@@ -438,8 +441,8 @@ if (isset($_SESSION['EmpUserrole']) && $_SESSION['EmpUserrole'] == "management")
         $data_valuediscount[] = $row_specific_date['sale_day'];
       }
       "<br>";
-       "'" . implode("','", $data_valuediscount) . "'";
-       implode(",", $data_labeldiscount);
+      "'" . implode("','", $data_valuediscount) . "'";
+      implode(",", $data_labeldiscount);
 
 
 

@@ -4,7 +4,7 @@ session_start();
 include '../sidebar.php';
 
 
-
+ 
 if (isset($_SESSION['EmpUserrole']) && $_SESSION['EmpUserrole'] == "management") {
   // The user has the "management" role
   // echo "User has the management role.";
